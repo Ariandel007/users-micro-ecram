@@ -1,0 +1,17 @@
+spring:
+    port: 30001
+
+    datasource:
+        initialization-mode: always
+        username: postgres
+        url: jdbc:postgresql://localhost:5432/ecram_security
+        platform: postgres
+        password: admin
+    jpa:
+        properties:
+            hibernate:
+                jdbc:
+                    lob:
+                        non_contextual_creation: 'true'
+        hibernate:
+            ddl-auto: update
