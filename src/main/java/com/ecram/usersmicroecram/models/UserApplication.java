@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class UserApplication implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 255)
+    @Column(length = 255, unique = true)
     private String username;
 
     @Column(length = 255)
@@ -54,13 +55,13 @@ public class UserApplication implements Serializable {
     private String age;
 
     @Column(name = "birth_date")
-    private Date birthDate;
+    private Instant birthDate;
 
     @Column(name = "birth_date_utc", length = 255)
     private String birthDateUtc;
 
     @Column(name = "account_creation_date")
-    private Date accountCreationDate;
+    private Instant accountCreationDate;
 
     @Column(name = "account_creation_date_utc", length = 255)
     private String accountCreationDateUtc;
