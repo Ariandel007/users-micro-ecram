@@ -3,7 +3,6 @@ package com.ecram.usersmicroecram.dtos.response;
 import lombok.Data;
 
 import java.time.Instant;
-import java.util.Date;
 
 @Data
 public class UserCreatedDto {

@@ -1,6 +1,5 @@
 package com.ecram.usersmicroecram.services.impl;
 
-import com.ecram.usersmicroecram.dtos.projections.IUserApplicationListProjection;
 import com.ecram.usersmicroecram.dtos.request.UserLoginDto;
 import com.ecram.usersmicroecram.dtos.request.UserRegistrationDto;
 import com.ecram.usersmicroecram.dtos.response.RolAppDto;
