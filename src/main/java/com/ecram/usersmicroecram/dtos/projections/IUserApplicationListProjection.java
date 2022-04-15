@@ -10,13 +10,13 @@ public interface IUserApplicationListProjection {
 
     String getEmail();
 
-    boolean isDeleted();
+    Boolean getIsDeleted();
 
-    boolean isBlocked();
+    Boolean getIsBlocked();
 
     String getAuthType();
 
-    short getAttemps();
+    Short getAttemps();
 
     String getFirstname();
 

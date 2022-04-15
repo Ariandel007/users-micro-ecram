@@ -1,7 +1,8 @@
+server:
+    port : 30001
 spring:
     application:
         name: user-service-ecram
-    port: 30001
 
     datasource:
         initialization-mode: always
@@ -19,7 +20,10 @@ spring:
                 format_sql: true
         hibernate:
             ddl-auto: update
-
+logging:
+    level:
+        org.hibernate.SQL: DEBUG
+        org.hibernate.type: TRACE
 
 eureka:
     instance:

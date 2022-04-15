@@ -16,4 +16,12 @@ public class UserRolKey implements Serializable {
     @Column(name = "id_rol_app", nullable = false)
     private Long rolAppId;
 
+    public UserRolKey(Long userAppId, Long rolAppId) {
+        this.userAppId = userAppId;
+        this.rolAppId = rolAppId;
+    }
+
+    public UserRolKey() {
+
+    }
 }

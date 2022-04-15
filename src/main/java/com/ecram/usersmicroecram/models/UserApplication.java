@@ -34,7 +34,7 @@ public class UserApplication implements Serializable {
     private boolean isBlocked = false;
 
     @Column(name = "auth_type")
-    private String authType;
+    private String authType = "email_registered";
 
     @Column(nullable = false)
     private short attemps = 0;

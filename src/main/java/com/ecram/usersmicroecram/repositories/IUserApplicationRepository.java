@@ -1,6 +1,7 @@
 package com.ecram.usersmicroecram.repositories;
 
 import com.ecram.usersmicroecram.dtos.projections.IUserApplicationListProjection;
+import com.ecram.usersmicroecram.dtos.response.UserForListDto;
 import com.ecram.usersmicroecram.models.UserApplication;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,17 +16,20 @@ import java.util.Optional;
 @Repository
 public interface IUserApplicationRepository extends JpaRepository<UserApplication, Long> {
 
+    @Query("SELECT DISTINCT ua FROM UserApplication ua JOIN FETCH ua.userRolList WHERE ua.username = :username ")
+    Optional<UserApplication> findByUsernameWithRoles(@Param("username") String username);
+
     Optional<UserApplication> findByUsername(String username);
 
-    @Query("SELECT ua.id, ua.username, ua.email, ua.isDeleted, ua.isBlocked, ua.authType, ua.attemps,  ua.firstname, " +
-            "ua.lastname, ua.country, ua.city, ua.age, ua.birthDate, ua.birthDateUtc, ua.accountCreationDate, ua.accountCreationDateUtc " +
+    @Query("SELECT new com.ecram.usersmicroecram.dtos.response.UserForListDto(ua.id, ua.username, ua.email, ua.isDeleted, ua.isBlocked, ua.authType, ua.attemps,  ua.firstname, " +
+            "ua.lastname, ua.country, ua.city, ua.age, ua.birthDate, ua.birthDateUtc, ua.accountCreationDate, ua.accountCreationDateUtc) " +
             " FROM UserApplication ua")
-    Page<IUserApplicationListProjection> findAllUsersWithPagination(Pageable pageable);
+    Page<UserForListDto> findAllUsersWithPagination(Pageable pageable);
 
-    @Query("SELECT ua.id, ua.username, ua.email, ua.isDeleted, ua.isBlocked, ua.authType, ua.attemps,  ua.firstname, " +
-            "ua.lastname, ua.country, ua.city, ua.age, ua.birthDate, ua.birthDateUtc, ua.accountCreationDate, ua.accountCreationDateUtc " +
+    @Query("SELECT new com.ecram.usersmicroecram.dtos.response.UserForListDto(ua.id, ua.username, ua.email, ua.isDeleted, ua.isBlocked, ua.authType, ua.attemps,  ua.firstname, " +
+            "ua.lastname, ua.country, ua.city, ua.age, ua.birthDate, ua.birthDateUtc, ua.accountCreationDate, ua.accountCreationDateUtc) " +
             " FROM UserApplication ua WHERE ua.accountCreationDate BETWEEN :startDate AND :endDate")
-    Page<IUserApplicationListProjection> findAllUsersWithPaginationAndCreationDateRange(@Param("startDate") Instant startDate,
+    Page<UserForListDto> findAllUsersWithPaginationAndCreationDateRange(@Param("startDate") Instant startDate,
                                                                          @Param("endDate")Instant endDate,
                                                                          Pageable pageable);
 }

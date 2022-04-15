@@ -1,5 +1,6 @@
 package com.ecram.usersmicroecram.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,12 +16,12 @@ public class UserRol implements Serializable {
     @EmbeddedId
     private UserRolKey id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("userAppId")
     @JoinColumn(name = "id_user_app")
     private UserApplication userApplication;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("rolAppId")
     @JoinColumn(name = "id_rol_app")
     private RolApp rolApp;
