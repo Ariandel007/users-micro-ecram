@@ -25,19 +25,19 @@ public class UserController {
     }
 
     @GetMapping("/findUser/{username}")
-    ResponseEntity<?> getUserByUsername(@PathVariable String username) throws Exception {
+    ResponseEntity<?> getUserByUsername(@PathVariable String username) {
         UserApplicationDto userApplication = this.userApplicationService.findByUsername(username);
         return ResponseEntity.ok().body(userApplication);
     }
 
     @PostMapping("/createUser")
-    ResponseEntity<?> createUser(@RequestBody UserRegistrationDto userRegistrationDto) throws Exception {
+    ResponseEntity<?> createUser(@RequestBody UserRegistrationDto userRegistrationDto) {
         UserCreatedDto userCreatedDto = this.userApplicationService.registerUser(userRegistrationDto);
         return ResponseEntity.ok().body(userCreatedDto);
     }
 
     @PostMapping("/findUsers")
-    ResponseEntity<?> findUserFiltered(@RequestBody UserListFilter userListFilter) throws Exception {
+    ResponseEntity<?> findUserFiltered(@RequestBody UserListFilter userListFilter) {
         Page<UserForListDto> usersFiltered = this.userApplicationService.findUserFiltered(userListFilter);
         return ResponseEntity.ok().body(usersFiltered);
     }

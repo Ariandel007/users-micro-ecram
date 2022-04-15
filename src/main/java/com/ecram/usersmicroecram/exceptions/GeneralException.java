@@ -1,6 +1,6 @@
 package com.ecram.usersmicroecram.exceptions;
 
-public class GeneralException extends Exception {
+public class GeneralException extends RuntimeException {
     private String errorCode;
     public GeneralException(String message, String errorCode) {
         super(message);

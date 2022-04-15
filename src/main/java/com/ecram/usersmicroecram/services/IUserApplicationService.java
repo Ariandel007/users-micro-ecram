@@ -11,13 +11,13 @@ import com.ecram.usersmicroecram.models.UserApplication;
 import org.springframework.data.domain.Page;
 
 public interface IUserApplicationService {
-    UserApplicationDto findByUsername(String username) throws Exception;
+    UserApplicationDto findByUsername(String username);
 
-    UserCreatedDto registerUser(UserRegistrationDto userRegistrationDto) throws Exception;
+    UserCreatedDto registerUser(UserRegistrationDto userRegistrationDto);
 
     //Esta funcion la hara el oauth en sí, aca solo esy
-    UserApplication loginUser(UserLoginDto userLoginDto) throws Exception;
+    UserApplication loginUser(UserLoginDto userLoginDto);
 
-    Page<UserForListDto> findUserFiltered(UserListFilter userListFilter) throws Exception;
+    Page<UserForListDto> findUserFiltered(UserListFilter userListFilter);
 
 }

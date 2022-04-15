@@ -61,7 +61,7 @@ public class UserApplicationService implements IUserApplicationService {
 
     @Override
     @Transactional(readOnly = true)
-    public UserApplicationDto findByUsername(String username) throws Exception {
+    public UserApplicationDto findByUsername(String username) {
         UserApplication userFinded = this.userApplicationRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundedException(MessageErros.ERROR_USER_NOT_FOUND_MSG, MessageErros.ERROR_USER_NOT_FOUND_CODE));
         UserApplicationDto userApplicationDto = this.modelMapper.map(userFinded,UserApplicationDto.class);
         //Llamar user_rol
@@ -83,7 +83,7 @@ public class UserApplicationService implements IUserApplicationService {
 
     @Override
     @Transactional(readOnly = false)
-    public UserCreatedDto registerUser(UserRegistrationDto userRegistrationDto) throws Exception {
+    public UserCreatedDto registerUser(UserRegistrationDto userRegistrationDto) {
         if(this.userNameExists(userRegistrationDto.getUsername())){
             throw new UserDuplicateException(MessageErros.ERROR_USER_ALREADY_EXISTS_MSG, MessageErros.ERROR_USER_ALREADY_EXISTS_CODE);
         }
@@ -121,7 +121,7 @@ public class UserApplicationService implements IUserApplicationService {
     }
 
     @Override
-    public UserApplication loginUser(UserLoginDto userLoginDto) throws Exception {
+    public UserApplication loginUser(UserLoginDto userLoginDto) {
 //        UserApplication userApplicationFinded = this.findByUsername(userLoginDto.getUsername());
 //        if(this.passwordEncoder.matches(userLoginDto.getPassword(),userApplicationFinded.getPassword()))
 //        {
@@ -134,7 +134,7 @@ public class UserApplicationService implements IUserApplicationService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<UserForListDto> findUserFiltered(UserListFilter userListFilter) throws Exception {
+    public Page<UserForListDto> findUserFiltered(UserListFilter userListFilter) {
         int page = userListFilter.getPage();//inicia en 0
         int size = userListFilter.getSize();
         Pageable pageable;
