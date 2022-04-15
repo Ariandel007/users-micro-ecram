@@ -97,4 +97,24 @@ public class Data {
         rolAppDto.setName("ROLE_USER");
         return rolAppDto;
     }
+
+    public static UserApplicationDto findAplicacionUserDtoComplete() {
+        UserApplicationDto userApplicationDto = new UserApplicationDto();
+        userApplicationDto.setId(1L);
+        userApplicationDto.setUsername("usertest");
+        userApplicationDto.setPassword("$2a$10$s8WTqvgyM3tT4AvGkkDbpOwHD981ylV1/EMJQJtvWmi0O/Ncb.xZ.");
+        userApplicationDto.setEmail("test123@gmail.com");
+        userApplicationDto.setFirstname("Alexander");
+        userApplicationDto.setLastname("Urbina");
+        userApplicationDto.setCountry("Peru");
+        userApplicationDto.setCity("Lima");
+        userApplicationDto.setAge("23");
+        userApplicationDto.setBirthDate(Instant.parse("1999-02-20T00:34:29.235Z"));
+        userApplicationDto.setBirthDateUtc("1999-02-20T00:34:29.235Z");
+        userApplicationDto.setAccountCreationDate(Instant.parse("2022-04-15T03:44:07.573716700Z"));
+        userApplicationDto.setAccountCreationDateUtc("2022-04-15T03:44:07.573716700Z");
+
+
+        return userApplicationDto;
+    }
 }
