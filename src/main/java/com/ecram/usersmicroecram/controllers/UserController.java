@@ -1,12 +1,10 @@
 package com.ecram.usersmicroecram.controllers;
 
-import com.ecram.usersmicroecram.dtos.projections.IUserApplicationListProjection;
 import com.ecram.usersmicroecram.dtos.request.UserRegistrationDto;
 import com.ecram.usersmicroecram.dtos.response.UserApplicationDto;
 import com.ecram.usersmicroecram.dtos.response.UserCreatedDto;
 import com.ecram.usersmicroecram.dtos.response.UserForListDto;
 import com.ecram.usersmicroecram.filters.UserListFilter;
-import com.ecram.usersmicroecram.models.UserApplication;
 import com.ecram.usersmicroecram.services.IUserApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,19 +23,19 @@ public class UserController {
     }
 
     @GetMapping("/findUser/{username}")
-    ResponseEntity<?> getUserByUsername(@PathVariable String username) {
+    ResponseEntity<UserApplicationDto> getUserByUsername(@PathVariable String username) {
         UserApplicationDto userApplication = this.userApplicationService.findByUsername(username);
         return ResponseEntity.ok().body(userApplication);
     }
 
     @PostMapping("/createUser")
-    ResponseEntity<?> createUser(@RequestBody UserRegistrationDto userRegistrationDto) {
+    ResponseEntity<UserCreatedDto> createUser(@RequestBody UserRegistrationDto userRegistrationDto) {
         UserCreatedDto userCreatedDto = this.userApplicationService.registerUser(userRegistrationDto);
         return ResponseEntity.ok().body(userCreatedDto);
     }
 
     @PostMapping("/findUsers")
-    ResponseEntity<?> findUserFiltered(@RequestBody UserListFilter userListFilter) {
+    ResponseEntity<Page<UserForListDto>> findUserFiltered(@RequestBody UserListFilter userListFilter) {
         Page<UserForListDto> usersFiltered = this.userApplicationService.findUserFiltered(userListFilter);
         return ResponseEntity.ok().body(usersFiltered);
     }
