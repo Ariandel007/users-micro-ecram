@@ -1,6 +1,5 @@
 package com.ecram.usersmicroecram.repositories;
 
-import com.ecram.usersmicroecram.dtos.projections.IUserApplicationListProjection;
 import com.ecram.usersmicroecram.dtos.response.UserForListDto;
 import com.ecram.usersmicroecram.models.UserApplication;
 import org.springframework.data.domain.Page;
