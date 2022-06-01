@@ -65,6 +65,9 @@ public class UserApplication implements Serializable {
     @Column(name = "account_creation_date_utc", length = 255)
     private String accountCreationDateUtc;
 
+    @Column(name = "image_url", length = 255)
+    private String imageUrl;
+
 
     @OneToMany(mappedBy = "userApplication", fetch = FetchType.LAZY)
     private List<UserRol> userRolList;

@@ -25,5 +25,6 @@ public class UserApplicationDto {
     private Instant accountCreationDate;
     private String accountCreationDateUtc;
     private List<RolAppDto> rolAppList;
+    private String imageUrl;
 //    private List<Email> emailList;
 }
