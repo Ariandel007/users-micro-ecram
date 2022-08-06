@@ -31,4 +31,6 @@ public interface IUserApplicationRepository extends JpaRepository<UserApplicatio
     Page<UserForListDto> findAllUsersWithPaginationAndCreationDateRange(@Param("startDate") Instant startDate,
                                                                          @Param("endDate")Instant endDate,
                                                                          Pageable pageable);
+    @Query("SELECT ua.id from UserApplication ua where ua.username = :username ")
+    Long findUserIdByUsername(@Param("username") String username);
 }

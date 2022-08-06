@@ -19,4 +19,6 @@ public interface IUserApplicationService {
 
     Page<UserForListDto> findUserFiltered(UserListFilter userListFilter);
 
+    Long getUserIdByUsername(String username);
+
 }

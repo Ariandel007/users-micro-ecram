@@ -18,7 +18,7 @@ import com.ecram.usersmicroecram.repositories.IRolAppRepository;
 import com.ecram.usersmicroecram.repositories.IUserApplicationRepository;
 import com.ecram.usersmicroecram.repositories.IUserRolRepository;
 import com.ecram.usersmicroecram.services.IUserApplicationService;
-import com.ecram.usersmicroecram.utils.MessageErros;
+import com.ecram.usersmicroecram.utils.MessageErrors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -61,7 +61,7 @@ public class UserApplicationService implements IUserApplicationService {
     @Override
     @Transactional(readOnly = true)
     public UserApplicationDto findByUsername(String username) {
-        UserApplication userFinded = this.userApplicationRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundedException(MessageErros.ERROR_USER_NOT_FOUND_MSG, MessageErros.ERROR_USER_NOT_FOUND_CODE));
+        UserApplication userFinded = this.userApplicationRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundedException(MessageErrors.ERROR_USER_NOT_FOUND_MSG, MessageErrors.ERROR_USER_NOT_FOUND_CODE));
         UserApplicationDto userApplicationDto = this.modelMapper.map(userFinded,UserApplicationDto.class);
         //Llamar user_rol
         List<UserRol> userRolList =  this.userRolRepository.userRolByUserId(userApplicationDto.getId());
@@ -84,7 +84,7 @@ public class UserApplicationService implements IUserApplicationService {
     @Transactional(readOnly = false)
     public UserCreatedDto registerUser(UserRegistrationDto userRegistrationDto) {
         if(this.userNameExists(userRegistrationDto.getUsername())){
-            throw new UserDuplicateException(MessageErros.ERROR_USER_ALREADY_EXISTS_MSG, MessageErros.ERROR_USER_ALREADY_EXISTS_CODE);
+            throw new UserDuplicateException(MessageErrors.ERROR_USER_ALREADY_EXISTS_MSG, MessageErrors.ERROR_USER_ALREADY_EXISTS_CODE);
         }
         //Usamos bcrypt para decodificarlo
         userRegistrationDto.setPassword(this.passwordEncoder.encode(userRegistrationDto.getPassword()));
@@ -106,7 +106,7 @@ public class UserApplicationService implements IUserApplicationService {
         UserApplication userApplicationCreated = this.userApplicationRepository.save(userApplicationToCreate);
 
         //LLAMAMOS AL ROL_USER
-        RolApp rolApp = this.rolAppRepository.findById(1L).orElseThrow(()->new RolNotFoundException("El rol no fue encontrado", "ERROR_ROL_NOT_FOUNDED"));
+        RolApp rolApp = this.rolAppRepository.findById(1L).orElseThrow(()->new RolNotFoundException(MessageErrors.ERROR_ROL_NOT_FOUNDED_MSG, MessageErrors.ERROR_ROL_NOT_FOUNDED_CODE));
 
         //Asociamos el usuario al ROLE_USER
         UserRol userRol = new UserRol();
@@ -151,6 +151,12 @@ public class UserApplicationService implements IUserApplicationService {
                 userListFilter.getStartDate(),
                 userListFilter.getEndDate(),
                 pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Long getUserIdByUsername(String username) {
+        return this.userApplicationRepository.findUserIdByUsername(username);
     }
 
 }

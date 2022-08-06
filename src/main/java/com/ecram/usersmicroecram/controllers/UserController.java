@@ -39,4 +39,11 @@ public class UserController {
         Page<UserForListDto> usersFiltered = this.userApplicationService.findUserFiltered(userListFilter);
         return ResponseEntity.ok().body(usersFiltered);
     }
+
+    @GetMapping("/findUserId/{username}")
+    ResponseEntity<Long> getUserIdByUsername(@PathVariable String username) {
+        Long userId = this.userApplicationService.getUserIdByUsername(username);
+        return ResponseEntity.ok().body(userId);
+    }
+
 }

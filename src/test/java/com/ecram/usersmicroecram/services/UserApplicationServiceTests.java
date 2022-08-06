@@ -7,7 +7,7 @@ import com.ecram.usersmicroecram.exceptions.UserNotFoundedException;
 import com.ecram.usersmicroecram.repositories.IRolAppRepository;
 import com.ecram.usersmicroecram.repositories.IUserApplicationRepository;
 import com.ecram.usersmicroecram.repositories.IUserRolRepository;
-import com.ecram.usersmicroecram.utils.MessageErros;
+import com.ecram.usersmicroecram.utils.MessageErrors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -66,7 +66,7 @@ public class UserApplicationServiceTests {
     void testFindUserThatNotExistsService() {
 
         when(this.userApplicationRepository.findByUsername("usr13134@ddq3")).
-                thenThrow(new UserNotFoundedException(MessageErros.ERROR_USER_NOT_FOUND_MSG, MessageErros.ERROR_USER_NOT_FOUND_CODE));
+                thenThrow(new UserNotFoundedException(MessageErrors.ERROR_USER_NOT_FOUND_MSG, MessageErrors.ERROR_USER_NOT_FOUND_CODE));
         when(this.modelMapper.map(Data.UserApplicationfindAplicacionUserTest(), UserApplicationDto.class)).thenReturn(Data.findAplicacionUserDto());
         when(this.userRolRepository.userRolByUserId(1L)).thenReturn(Data.listUsersRol());
         when(this.modelMapper.map(Data.getRolApp(), RolAppDto.class)).thenReturn(Data.getRolAppDto());
