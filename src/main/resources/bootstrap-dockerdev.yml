@@ -1,0 +1,6 @@
+spring:
+    application:
+        name: user-service-ecram
+    cloud:
+        config:
+            uri: http://192.168.0.7:8888
